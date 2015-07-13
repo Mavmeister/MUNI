@@ -16,9 +16,18 @@
   <input type="number" ng-modal='RouteNumb'>
   <button ng-click='fetchRoute()' class='button'> Submit Route </button>
   <h3> {{ display }} </h3>
-
-
-
+</div>
+<div id='routeModal'>
+  <div>
+    <h1> Add a Route </h1>
+    <form class='add-route'>
+      <input type='number' min='1' max='100' placeholder='Route Number' ng-model='routeID'/> <br/>
+      Direction: <br/>
+      <input type='radio' ng-model='route.direction' value='Inbound'/> Inbound <br/>
+      <input type='radio' ng-model='route.direction' value='Outbound'/> Outbound <br/>
+      <button ng-click='addRoute(routeID, stopID, route.direction)'>Submit</button>
+    </form>
+  </div>
 </div>
 </body>
 </html>

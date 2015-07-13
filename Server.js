@@ -1,7 +1,11 @@
-var app = require('./server-config.js');
+var app = require('express');
+var restbus = require('restbus');
+var http = require('http');
+ 
+http.createServer(app).listen('3030', function() {
+  console.log('app is now listening on port 3030');
+  restbus.listen(function() {
+    console.log('restbus is now listening on port 3535');
+  });
+});
 
-var port = process.env.PORT || 8081;
-
-app.listen(port);
-
-console.log(' MUNI Server now listening on port ' + port);

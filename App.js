@@ -1,18 +1,13 @@
 angular.module('MUNI', [])
 
-
 .factory('Routes', function($http){
   var fetchRoutes = function(){
     var getData = $http({
       method: 'GET',
-      url: 'http://webservices.nextbus.com/service/publicXMLFeed?command=routeConfig',
-      params: {
-        a: 'sf-muni',
-        r: 'J'
-      }
+      url: 'http://localhost:3535/agencies/sf-muni/routes',
     });
     getData.then(function(data){
-      console.log(data.data)
+      console.log(data)
     }).catch(function(err){
       console.log('Error: ', err)
     })
