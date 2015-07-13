@@ -1,0 +1,27 @@
+{
+  "name": "muni",
+  "version": "1.0.0",
+  "description": "Creating a MUNI API for accessing route information to later be used in Arduino or other microprocessors",
+  "main": "App.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mavmeister/MUNI.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mavmeister/MUNI/issues"
+  },
+  "homepage": "https://github.com/Mavmeister/MUNI#readme",
+  "dependencies": {
+    "angular": "^1.4.2",
+    "bootstrap": "^3.3.5",
+    "express": "^4.13.1",
+    "jquery": "^2.1.4",
+    "nodemon": "^1.3.7"
+  }
+}

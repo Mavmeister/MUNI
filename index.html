@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Muni</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+  <script src='App.js'></script>
+  <!-- <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"> -->
+</head>
+<body ng-app='MUNI'>
+<div class='container' ng-controller="mainCtrl">
+  <input type="number" ng-modal='RouteNumb'>
+  <button ng-click='fetchRoute()' class='button'> Submit Route </button>
+  <h3> {{ display }} </h3>
+
+
+
+</div>
+</body>
+</html>
