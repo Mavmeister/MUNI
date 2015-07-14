@@ -5,6 +5,42 @@ angular.module('MUNI.services', [])
 .factory('Routes', function($http){
   var MuniURL = 'http://localhost:3535/agencies/sf-muni/'
 
+  var getLoc = function(callback){
+    var getData = $http({
+      method: 'GET',
+      url: 'http://freegeoip.net/json/'
+    });
+    getData.then(function(data){
+      callback(data)
+    }).catch(function(err){
+      console.log(err)
+    })
+  }
+
+  var distCalc = function(input, output, cb){
+    var inputLoc1 = 37.776
+    var inputLoc2 = -122.411
+    var outputLoc1 = 
+    var outputLoc2 = 
+    // var outputLoc = {41.232, -81.343}
+
+    var getData = $http({
+      method: 'GET',
+      url: 'https://maps.googleapis.com/maps/api/distancematrix/JSON',
+      params: {
+        origins: inputLoc1 + ',' +inputLoc2,
+        destinations: 'Seattle',
+        mode: 'walking',
+        units: 'imperial',
+        key: 'AIzaSyA7TbsUFsundVA54vNphHBB3Vn9vmxQYBs',
+      },
+      dataType: 'jsonp'
+    })
+    getData.then(function(data){
+      console.log(data);
+    })
+  }
+
 
   var allRoutes = function(callback){
     var routes = [];
@@ -80,7 +116,9 @@ angular.module('MUNI.services', [])
     addRoute: addRoute,
     seePredictionsForStopID: seePredictionsForStopID,
     seePredictionsForRouteID: seePredictionsForRouteID,
-    seePredictionsForCurrentLoc: seePredictionsForCurrentLoc
+    seePredictionsForCurrentLoc: seePredictionsForCurrentLoc,
+    getLoc: getLoc,
+    distCalc: distCalc
 
   };
 })

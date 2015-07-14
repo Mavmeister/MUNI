@@ -9,7 +9,23 @@ angular.module('MUNI')
   $scope.Alltimes = [];
   $scope.direction = [];
   $scope.currentRt;
-  $scope.otherTimes = "Please Select a Route"
+  $scope.otherTimes = "Please Select a Route";
+
+  $scope.dist = function(){
+    Routes.distCalc();
+  }
+
+  $scope.getLoc = function(){
+    var latitude;
+    var longitude;
+    var cb = function(data){
+      latitude = data.data.latitude
+      longitude = data.data.longitude
+      console.log(data)
+      console.log(longitude)
+    }
+    Routes.getLoc(cb);
+  }
 
   $scope.otherTime = function(input){
     console.log(input)

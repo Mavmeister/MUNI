@@ -30,11 +30,12 @@
       <p id='selRt'> Selected Route:</p> <h3>{{ selectedRoute }} </h3>
     </div><!-- /.col-lg-4 -->
 
-    <div class="col-sm-2">
+    <div class="col-sm-2" ng-model="direction">
       <h2> Direction </h2>
       <h4> Step 3: Direction </h4>
-        <button id='out'> Outbound </button> <br/>
-        <button id='in'> Inbound </button>
+        <button id='out' ng-click='dist()'> Outbound </button> <br/>
+        <button id='in' ng-click='getLoc()'> Inbound </button> <br/>
+        {{ hi }}
       </div>
 
     <div class="col-sm-5">
@@ -67,5 +68,6 @@
     </div>
   </div>
 </div>
+<script src='geoPosition.js'></script>
 </body>
 </html>
