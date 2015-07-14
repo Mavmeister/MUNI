@@ -9,25 +9,57 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
   <script src='App.js'></script>
+  <script src='services.js'></script>
+  <script src='mainController.js'></script>
   <!-- <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"> -->
 </head>
 <body ng-app='MUNI'>
+<!-- START OF ROUTE INPUT -->
 <div class='container' ng-controller="mainCtrl">
-  <input type="number" ng-modal='RouteNumb'>
-  <button ng-click='fetchRoute()' class='button'> Submit Route </button>
-  <h3> {{ display }} </h3>
-  <!-- <h6> {{ routes in $scope.allRoutes }} </h6> -->
+<form name='submitRoute' ng-submit='oneRoute(routeID)'>
+  
+  <input name='routeInput' type="text" ng-model='routeID'
+    placeholder= 'Enter route' required
+    ng-class ="{'error': submitRoute.$invalid && submitRoute.$dirty}"/>
+  <button type='submit' value='submitR' ng-disabled='submitRoute.$invalid'>
+  Submit Route
+  </button>
+</form>
+<!-- END OF ROUTE INPUT -->
+
+<!-- START OF ROUTE DROP DOWN -->
+<div>
+<select class="routeSelect" ng-model="selectedRoute" ng-init="getAll()">
+<option ng-repeat="route in routeList" </option>
+{{ route }}
+</select>
+<button ng-click='viewRoute(selectedRoute)'>VIEW ROUTE</button>
+<br/>
+<select ng-show="selectedRoute" class="stopSelect" ng-model="selectedStop">
+<!-- <option ng-repeat="model in selectedRoute track by model.id" </option> -->
+{{ selectedRoute }}
+</select>
+<br/>
+<select ng-show="selectedStop" class="routeSelect" ng-model="selectedDirection">
+<option ng-repeat="route in routeList" </option>
+{{ route }}
+</select>
 </div>
-<div class='routeInput'>
-  <div>
-    <h1> Add a Route </h1>
-    <form class='add-route'>
-      <input type='number' min='1' max='100' placeholder='Route Number' ng-model='routeID'/> <br/>
-      Direction: <br/>
-      <input type='radio' ng-model='route.direction' value='Inbound'/> Inbound <br/>
-      <input type='radio' ng-model='route.direction' value='Outbound'/> Outbound <br/>
-      <button ng-click='addRoute(routeID, stopID, route.direction)'>Submit</button>
-    </form>
+<!-- END OF ROUTE DROP DOWN -->
+  <div class='routeInput'>
+      <h1> Add a Route </h1>
+      <div ng-dropdown="" options="routeList" selected-model="selectModel">
+      </div>
+      <form name='add-route'>
+        <input id='RouteID' type='text' placeholder='Route Number' ng-model='input'/> <br/>
+        Direction: <br/>
+        <input type='radio' ng-model='route.direction' value='Inbound'/> Inbound <br/>
+        <input type='radio' ng-model='route.direction' value='Outbound'/> Outbound <br/>
+        <button ng-click=''>Submit</button>
+      </form>
+    <div class='routeDisplay'>
+      {{ getAll }}
+    </div>
   </div>
 </div>
 </body>

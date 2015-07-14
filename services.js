@@ -1,11 +1,23 @@
-'use strinct';
+'use strict';
 
 angular.module('MUNI.services', [])
 
 .factory('Routes', function($http){
   var MuniURL = 'http://localhost:3535/agencies/sf-muni/'
-  var routes = [];
 
+
+  var allRoutes = function(callback){
+    var routes = [];
+    var getData = $http({
+      method: 'GET',
+      url: MuniURL + 'routes/'
+    });
+    getData.then(function(data){
+      callback(data.data);
+    }).catch(function(err){
+      console.log('Error: ', err)
+    })
+  };
   var fetchRoute = function(routeID){
     var getData = $http({
       method: 'GET',
@@ -15,20 +27,6 @@ angular.module('MUNI.services', [])
       console.log(data)
     }).catch(function(err){
       console.log('Error: ', err)
-    })
-  };
-  var allRoutes = function(){
-    var getData = $http({
-      method: 'GET',
-      url: MuniURL + 'routes/'
-    });
-    getData.then(function(data){
-      data.data.forEach(function(route){
-        routes.push(route.title)
-      }).catch(function(err){
-      console.log('Error: ', err)
-    })
-        console.log(routes)
     })
   };
   var addRoute = function(routeID, stopID, direction){
@@ -53,7 +51,7 @@ angular.module('MUNI.services', [])
       console.log('Error: ', err)
     })
   }
-  var seePredictionsForStopID = function(stopID, routeID, direction){
+  var seePredictionsForStopID = function(routeID, stopID, direction){
     var getData = $http({
       method: 'GET',
       url: MuniURL + 'stops/' + stopID + '/predictions'
@@ -75,6 +73,7 @@ angular.module('MUNI.services', [])
       console.log('Error: ', err)
     })
   }
+
   return {
     fetchRoute: fetchRoute,
     allRoutes: allRoutes,
@@ -84,11 +83,4 @@ angular.module('MUNI.services', [])
     seePredictionsForCurrentLoc: seePredictionsForCurrentLoc
 
   };
-})
-
-
-.controller('mainCtrl', function($scope, Routes){
-  $scope.display = Routes.fetchRoute('F');
-  $scope.allRoutes = Routes.routes;
-  $scope.stopIDPredict = Routes.seePredictionsForStopID(13092, 'F')
 })
