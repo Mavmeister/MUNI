@@ -29,15 +29,14 @@
 
 <!-- START OF ROUTE DROP DOWN -->
 <div>
-<select class="routeSelect" ng-model="selectedRoute" ng-init="getAll()">
-<option ng-repeat="route in routeList" </option>
-{{ route }}
+<select class="routeSelect" ng-model="selectedRoute" ng-init="getAll()"
+ng-options="route.id as route.title for route in routeList">
 </select>
-<button ng-click='viewRoute(selectedRoute)'>VIEW ROUTE</button>
+<button ng-click='$scope.selectedStop = oneRoute(selectedRoute)'>VIEW ROUTE</button>
+Selected Route: {{ selectedRoute }}
 <br/>
 <select ng-show="selectedRoute" class="stopSelect" ng-model="selectedStop">
-<!-- <option ng-repeat="model in selectedRoute track by model.id" </option> -->
-{{ selectedRoute }}
+{{ selectedStop}}
 </select>
 <br/>
 <select ng-show="selectedStop" class="routeSelect" ng-model="selectedDirection">
