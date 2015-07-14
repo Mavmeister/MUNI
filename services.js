@@ -29,24 +29,24 @@ angular.module('MUNI.services', [])
       console.log('Error: ', err)
     })
   };
-  var addRoute = function(routeID, stopID, direction){
+  var addRoute = function(routeID, callback){
     var getData = $http({
       method: 'GET',
       url: MuniURL + 'routes/' + routeID
     })
     getData.then(function(data){
-      console.log(data)
+      callback(data)
     }).catch(function(err){
       console.log('Error: ', err)
     })
   };
-  var seePredictionsForRouteID = function(routeID, stopID, direction){
+  var seePredictionsForRouteID = function(routeID, stopID, callback){
     var getData = $http({
       method: 'GET',
-      url: MuniURL + 'routes/' + routeID + 'stop/' + stopID + '/predictions'
+      url: MuniURL + 'routes/' + routeID + '/stops/' + stopID + '/predictions'
     });
     getData.then(function(data){
-      console.log(data)
+      callback(data)
     }).catch(function(err){
       console.log('Error: ', err)
     })

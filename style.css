@@ -8,3 +8,52 @@
 .stopSelect {
   width: 200px;
 }
+.col-sm-5 {
+  text-align: center;
+  height: 300px;
+}
+
+p {
+  font-size: 20px;
+}
+#selRt{
+  margin: 30px 0px 0px 0px;
+}
+#selStp{
+  margin: 50px 0px 0px 0px;
+}
+.col-sm-5 h4 {
+  height: 70px;
+}
+.col-sm-2 { 
+  text-align: center;
+  height: 100px;
+}
+#out {
+  border-radius: 10px;
+  margin: 5px;
+}
+#in {
+  margin: 5px;
+  border-radius: 10px;
+}
+.col-sm-5 h2 {
+  height: 30px;
+}
+.col-sm-5 .routeSelect {
+  border: 1px solid gold;
+}
+
+#viewRoute {
+  height: 30px;
+  width: 150px;
+  text-align: center;
+  padding: 5px;
+  margin: 10px 10px 10px 30px;
+}
+
+.col-lg-8 {
+  text-align: center;
+  padding: 20px;
+  margin: 10px;
+}

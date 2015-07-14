@@ -14,50 +14,56 @@
   <!-- <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"> -->
 </head>
 <body ng-app='MUNI'>
-<!-- START OF ROUTE INPUT -->
 <div class='container' ng-controller="mainCtrl">
-<form name='submitRoute' ng-submit='oneRoute(routeID)'>
-  
-  <input name='routeInput' type="text" ng-model='routeID'
-    placeholder= 'Enter route' required
-    ng-class ="{'error': submitRoute.$invalid && submitRoute.$dirty}"/>
-  <button type='submit' value='submitR' ng-disabled='submitRoute.$invalid'>
-  Submit Route
-  </button>
-</form>
-<!-- END OF ROUTE INPUT -->
 
 <!-- START OF ROUTE DROP DOWN -->
-<div>
-<select class="routeSelect" ng-model="selectedRoute" ng-init="getAll()"
-ng-options="route.id as route.title for route in routeList">
-</select>
-<button ng-click='$scope.selectedStop = oneRoute(selectedRoute)'>VIEW ROUTE</button>
-Selected Route: {{ selectedRoute }}
-<br/>
-<select ng-show="selectedRoute" class="stopSelect" ng-model="selectedStop">
-{{ selectedStop}}
-</select>
-<br/>
-<select ng-show="selectedStop" class="routeSelect" ng-model="selectedDirection">
-<option ng-repeat="route in routeList" </option>
-{{ route }}
-</select>
-</div>
-<!-- END OF ROUTE DROP DOWN -->
-  <div class='routeInput'>
-      <h1> Add a Route </h1>
-      <div ng-dropdown="" options="routeList" selected-model="selectModel">
+
+  <!-- Three columns of text below the carousel -->
+  <div class="row">
+    <div class="col-sm-5">
+      <h2>Route Select</h2>
+      <h4> Step 1: Select your route </h4>
+      <select class="routeSelect" ng-model="selectedRoute" ng-init="getAll()" ng-change="viewRoute(selectedRoute)"
+      ng-options="route.id as route.title for route in routeList">
+      </select><br/>
+       <br/>
+      <p id='selRt'> Selected Route:</p> <h3>{{ selectedRoute }} </h3>
+    </div><!-- /.col-lg-4 -->
+
+    <div class="col-sm-2">
+      <h2> Direction </h2>
+      <h4> Step 3: Direction </h4>
+        <button id='out'> Outbound </button> <br/>
+        <button id='in'> Inbound </button>
       </div>
-      <form name='add-route'>
-        <input id='RouteID' type='text' placeholder='Route Number' ng-model='input'/> <br/>
-        Direction: <br/>
-        <input type='radio' ng-model='route.direction' value='Inbound'/> Inbound <br/>
-        <input type='radio' ng-model='route.direction' value='Outbound'/> Outbound <br/>
-        <button ng-click=''>Submit</button>
-      </form>
+
+    <div class="col-sm-5">
+      <h2>Stop Select</h2>
+      <h4> Step 2: Click View Stops and select your stop </h4>
+      <select class="routeSelect" ng-model="selectedStop" 
+      ng-options="stop.id as stop.title group by stop.direction for stop in stops" ng-change="viewInfo(selectedRoute, selectedStop)">
+      </select><br/>
+      <p id='selStp'> Selected Stop:</p> <h3>{{ selectedStop }} </h3>
+    </div><!-- /.col-lg-4 -->
+
+<!--     <div class="col-sm-4">
+      <h2>Direction</h2>
+      <h4> Step 3: Select your direction and click View Info </h4>
+      <select class="routeSelect" ng-model="selectedDirection">
+      <option value="Inbound"> Inbound </option>
+      <option value="Outbound"> Outbound </option>
+      </select><br/>
+      <button id='viewRoute'ng-click='viewInfo(selectedRoute, selectedStop, selectedDirection)'>View Info</button> <br/>
+      <p> Selected Direction:</p> <h3>{{ selectedDirection}} </h3>
+
+    </div><!-- /.col-lg-4 --> 
+  </div>
+<!-- END OF ROUTE DROP DOWN -->
+  <div class='col-lg-8'>
+      <h1> Route Information </h1> <br/>
+      <h2 ng-show="selectedStop"> Soonest Time: {{ Alltimes[0] }}</h2>
+      <h3>{{ otherTimes  }} </h3>
     <div class='routeDisplay'>
-      {{ getAll }}
     </div>
   </div>
 </div>

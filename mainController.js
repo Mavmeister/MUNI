@@ -4,26 +4,81 @@ angular.module('MUNI')
 
 .controller('mainCtrl', function($scope, Routes){
   $scope.routeList = [];
+  $scope.stops = []
   $scope.routeIDs = [];
-  $scope.selectedRoute;
+  $scope.Alltimes = [];
+  $scope.direction = [];
+  $scope.currentRt;
+  $scope.otherTimes = "Please Select a Route"
+
+  $scope.otherTime = function(input){
+    console.log(input)
+    $scope.otherTimes = input.splice(1)
+  }
+
+  $scope.showTime = function(input){
+    console.log('scope.currentRt.data ', $scope.currentRt.data )
+    $scope.Alltimes = [];
+    var datas = $scope.currentRt.data;
+    var objs;
+    var times= [];
+    if (datas.length === 0){
+      $scope.Alltimes = "No Route Information"
+      //wrap--
+    } else {
+    datas.forEach(function(obj){
+      if (obj === undefined){
+        console.log('NO DATA')
+      } else {
+        objs = obj
+      }
+    })
+    objs.values.forEach(function(time){
+      times.push(time)
+    })
+    // wrapped --
+  }
+    times.forEach(function(time){
+      $scope.Alltimes.push(time.minutes)
+    })
+  },
+
+  $scope.showDirection = function(input){
+      console.log("Info: ", data)
+      $scope.times.push(data.data[0].values);
+      $scope.direction.push()
+
+  },
+
+  $scope.viewInfo = function(routeID, stopID, direction){
+    console.log(routeID, stopID, direction);
+    var data = Routes.seePredictionsForRouteID(routeID, stopID, function(data){
+      $scope.currentRt = data
+      console.log("CurrentRt: ", $scope.currentRt)
+      $scope.showTime();
+      $scope.otherTime($scope.Alltimes);
+    })
+  },
 
   $scope.getAll = function(){
     var data = Routes.allRoutes(function(data){
      data.forEach(function(route){
       $scope.routeList.push(route);
-      // $scope.routeIDs.push(route.id);
-      // console.log(route.id)
      })
-     console.log($scope.routeList)
     });
   },
   $scope.oneRoute = function(routeID){
     Routes.fetchRoute(routeID);
     console.log(routeID)
-  }
+  },
 
   $scope.viewRoute = function(routeID){
-    console.log(routeID)
+    $scope.stops = [];
+    var data = Routes.addRoute(routeID, function(data){
+      data.data.stops.forEach(function(stop){
+        $scope.stops.push(stop)
+      });
+    })
   }
 
   $scope.display = Routes.fetchRoute('F');
