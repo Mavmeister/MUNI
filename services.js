@@ -1,4 +1,6 @@
-angular.module('MUNI', ['MUNI.services'])
+'use strinct';
+
+angular.module('MUNI.services', [])
 
 .factory('Routes', function($http){
   var MuniURL = 'http://localhost:3535/agencies/sf-muni/'
