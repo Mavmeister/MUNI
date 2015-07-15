@@ -1,6 +1,12 @@
 'use strict';
+var app = angular.module('MUNI.services', [])
 
-angular.module('MUNI.services', [])
+app.config(function($httpProvider) {
+    //Enable cross domain calls
+    $httpProvider.defaults.useXDomain = true;
+})
+
+
 
 .factory('Routes', function($http){
   var MuniURL = 'http://localhost:3535/agencies/sf-muni/'
@@ -18,23 +24,29 @@ angular.module('MUNI.services', [])
   }
 
   var distCalc = function(input, output, cb){
+
     var inputLoc1 = 37.776
     var inputLoc2 = -122.411
-    var outputLoc1 = 
-    var outputLoc2 = 
+    var outputLoc1 = 37.78
+    var outputLoc2 = -122.420
     // var outputLoc = {41.232, -81.343}
 
     var getData = $http({
       method: 'GET',
       url: 'https://maps.googleapis.com/maps/api/distancematrix/JSON',
+      cache: false,
+      dataType: 'jsonp',
+      crossDomain: true,
+      headers: {
+        "AccessControlAllowOrigin": '*',
+              },
       params: {
-        origins: inputLoc1 + ',' +inputLoc2,
-        destinations: 'Seattle',
+        origins: inputLoc1 + ',' + inputLoc2,
+        destinations: outputLoc1 + ',' + outputLoc2,
         mode: 'walking',
         units: 'imperial',
         key: 'AIzaSyA7TbsUFsundVA54vNphHBB3Vn9vmxQYBs',
-      },
-      dataType: 'jsonp'
+      }
     })
     getData.then(function(data){
       console.log(data);

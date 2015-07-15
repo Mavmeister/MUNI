@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('MUNI')
+var app = angular.module('MUNI')
 
 .controller('mainCtrl', function($scope, Routes){
   $scope.routeList = [];
