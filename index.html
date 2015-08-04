@@ -20,7 +20,7 @@
 
   <!-- Three columns of text below the carousel -->
   <div class="row">
-    <div class="col-sm-5">
+    <div id='rte'class="col-sm-5">
       <h2>Route Select</h2>
       <h4> Step 1: Select your route </h4>
       <select class="routeSelect" ng-model="selectedRoute" ng-init="getAll()" ng-change="viewRoute(selectedRoute)"
@@ -32,15 +32,15 @@
 
     <div class="col-sm-2" ng-model="direction">
       <h2> Direction </h2>
-      <h4> Step 3: Direction </h4>
-        <button id='out' ng-click='dist()'> Outbound </button> <br/>
-        <button id='in' ng-click='getLoc()'> Inbound </button> <br/>
+      <h4> Step 2: Direction </h4>
+        <button class="btn btn-primary"id='out' ng-click='dist()'> Outbound </button> <br/>
+        <button class="btn btn-primary"id='in' ng-click='getLoc()'> Inbound </button> <br/>
         {{ hi }}
       </div>
 
-    <div class="col-sm-5">
+    <div id='stp'class="col-sm-5">
       <h2>Stop Select</h2>
-      <h4> Step 2: Click View Stops and select your stop </h4>
+      <h4> Step 3: Click View Stops and select your stop </h4>
       <select class="routeSelect" ng-model="selectedStop" 
       ng-options="stop.id as stop.title group by stop.direction for stop in stops" ng-change="viewInfo(selectedRoute, selectedStop)">
       </select><br/>
@@ -61,9 +61,10 @@
   </div>
 <!-- END OF ROUTE DROP DOWN -->
   <div class='col-lg-8'>
-      <h1> Route Information </h1> <br/>
-      <h2 ng-show="selectedStop"> Soonest Time: {{ Alltimes[0] }}</h2>
-      <h3>{{ otherTimes  }} </h3>
+      <h1> <u>Route Information</u> </h1> <br/>
+      <h2 class="success"ng-show="selectedStop"> Earliest: {{ Alltimes[0] }}</h2>
+      <h3 ng-show="selectedStop"> Next: {{ otherTimes  }} </h3>
+      <h3 ng-show="selectedStop"> Location of Stop: {{ location  }} </h3>
     <div class='routeDisplay'>
     </div>
   </div>

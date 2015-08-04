@@ -10,6 +10,7 @@ var app = angular.module('MUNI')
   $scope.direction = [];
   $scope.currentRt;
   $scope.otherTimes = "Please Select a Route";
+  $scope.location = 0;
 
   $scope.dist = function(){
     Routes.distCalc();
@@ -21,8 +22,8 @@ var app = angular.module('MUNI')
     var cb = function(data){
       latitude = data.data.latitude
       longitude = data.data.longitude
-      console.log(data)
-      console.log(longitude)
+      $scope.location = [latitude + ',' + longitude];
+      console.log([longitude + ',' + longitude])
     }
     Routes.getLoc(cb);
   }
@@ -73,6 +74,7 @@ var app = angular.module('MUNI')
       console.log("CurrentRt: ", $scope.currentRt)
       $scope.showTime();
       $scope.otherTime($scope.Alltimes);
+      $scope.getLoc();
     })
   },
 

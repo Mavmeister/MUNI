@@ -4,6 +4,7 @@
 
 .routeSelect {
   width: 200px;
+  height: 50px;
 }
 .stopSelect {
   width: 200px;
@@ -15,6 +16,10 @@
 
 p {
   font-size: 20px;
+}
+#rte {
+}
+#stp {
 }
 #selRt{
   margin: 30px 0px 0px 0px;
@@ -28,6 +33,7 @@ p {
 .col-sm-2 { 
   text-align: center;
   height: 100px;
+  width: 100px;
 }
 #out {
   border-radius: 10px;
